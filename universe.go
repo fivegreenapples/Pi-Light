@@ -23,7 +23,7 @@ func newUniverse(console *console) *universe {
 func (u *universe) mux() *goji.Mux {
 	mux := goji.SubMux()
 	mux.HandleFunc(pat.Get("/getall"), u.handlerGetAll)
-	mux.HandleFunc(pat.Get("/setsingle/:channel"), u.handlerSetSingle)
+	mux.HandleFunc(pat.Post("/setsingle/:channel"), u.handlerSetSingle)
 	return mux
 }
 
@@ -53,9 +53,9 @@ func (u *universe) handlerSetSingle(w http.ResponseWriter, r *http.Request) {
 		wsRespondWithReason(w, "key 'value' not found in request")
 		return
 	}
-	value, ok := rawValue.(int)
+	value, ok := rawValue.(float64)
 	if !ok {
-		wsRespondWithReason(w, "value was not an integer")
+		wsRespondWithReason(w, "value was not a number")
 		return
 	}
 	if value < 0 || value > 255 {
@@ -63,6 +63,7 @@ func (u *universe) handlerSetSingle(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	u.channels[uint16(channel)-1] = uint8(value)
 	errCon := u.console.setSingle(uint16(channel), uint8(value))
 	if errCon != nil {
 		wsRespondWithError(w, errCon)

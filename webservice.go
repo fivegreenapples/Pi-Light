@@ -10,15 +10,15 @@ import (
 type wsRequest map[string]interface{}
 
 type wsResponse struct {
-	status string
-	reason string
-	data   interface{}
+	Status string      `json:"status"`
+	Reason string      `json:"reason"`
+	Data   interface{} `json:"data"`
 }
 
 func wsRespond(w http.ResponseWriter, data interface{}) {
 	response := wsResponse{
-		status: "OK",
-		data:   data,
+		Status: "OK",
+		Data:   data,
 	}
 	responseData, err := json.Marshal(response)
 	if err != nil {
@@ -37,9 +37,9 @@ func wsRespondWithError(w http.ResponseWriter, e error) {
 }
 func wsRespondWithReason(w http.ResponseWriter, reason string) {
 	response := wsResponse{
-		status: "ERROR",
-		reason: reason,
-		data:   nil,
+		Status: "ERROR",
+		Reason: reason,
+		Data:   nil,
 	}
 	responseData, err := json.Marshal(response)
 	if err != nil {
