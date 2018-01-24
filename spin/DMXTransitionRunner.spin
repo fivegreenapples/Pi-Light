@@ -1,5 +1,9 @@
 CON
     TransitionSize = 12 ' 12 bytes to define transitions
+
+OBJ
+    byteDisplay                 : "ByteDisplay"
+
 VAR
     byte TransitionData[512 * TransitionSize]
     long ValuesPointer
