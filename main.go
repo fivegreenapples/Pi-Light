@@ -26,8 +26,11 @@ func main() {
 	mux.Handle(pat.Get("/ws/0/*"), universes[0].mux())
 	mux.Handle(pat.Get("/ws/1/*"), universes[1].mux())
 
+	http.Handle("/ui", http.FileServer(http.Dir("/home/pi/go/src/github.com/fivegreenapples/PiLight/ui")))
+	http.Handle("/ws", mux)
+
 	log.Println("Starting pilight webservice")
-	err = http.ListenAndServe("localhost:8080", mux)
+	err = http.ListenAndServe(":8080", http.DefaultServeMux)
 	if err != nil {
 		log.Fatal(err)
 	}
