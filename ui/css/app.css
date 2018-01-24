@@ -1,0 +1,28 @@
+.colors-for-reference {
+	color: rgba(36, 71, 90, 1);
+	color: rgba(72, 169, 166, 1);
+	color: rgba(228, 223, 218, 1);
+	color: rgba(155, 131, 96, 1);
+	color: rgba(193, 102, 107, 1);
+}
+.disable_text_highlighting {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none; /* Webkit */
+	-moz-user-select: none;    /* Firefox */
+	-ms-user-select: none;     /* IE 10  */
+	
+	/* Currently not supported in Opera but will be soon */
+	-o-user-select: none;
+	user-select: none;  
+}
+
+body {
+	background-color: rgba(228, 223, 218, 1);
+	color: rgba(36, 71, 90, 1);
+	font-size:16px;
+	font-family: verdana, tahoma, arial, sans-serif;
+}
+
+#console {
+	margin:30px;
+}
