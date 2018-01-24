@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"time"
 
 	"github.com/tarm/serial"
 )
@@ -18,9 +19,15 @@ func main() {
 	}
 
 	dmxConsole := newConsole(s)
-	err = dmxConsole.setSingle(100, 170)
-	if err != nil {
-		log.Fatal("Error sending command: " + err.Error())
+
+	for {
+		curTime := time.Now()
+		dmxConsole.setSingle(100, byte(curTime.Hour()))
+		time.Sleep(2 * time.Second)
+		dmxConsole.setSingle(100, byte(curTime.Minute()))
+		time.Sleep(2 * time.Second)
+		dmxConsole.setSingle(100, byte(0))
+		time.Sleep(5 * time.Second)
 	}
 
 }

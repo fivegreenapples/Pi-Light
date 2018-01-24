@@ -28,14 +28,17 @@ func (c *console) setSingle(channel uint16, value uint8) error {
 		val:     value,
 	}
 
-	return c.sendSerialisable(command)
+	return c.sendCommand(command)
 }
 
-// func (c *console) sendRaw(bytes []byte) error {
-// 	_, err := c.dest.Write(bytes)
-// 	return err
-// }
-func (c *console) sendSerialisable(bytes serialiser) error {
-	_, err := c.dest.Write(bytes.serialise())
+func (c *console) sendCommand(cmd dmxCommand) error {
+
+	bytes := []byte{}
+	bytes = append(bytes, cmd.id())
+	data := cmd.data()
+	bytes = append(bytes, byte(len(data)))
+	bytes = append(bytes, data...)
+
+	_, err := c.dest.Write(bytes)
 	return err
 }
