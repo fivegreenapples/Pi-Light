@@ -4,7 +4,7 @@ App.service("pilightws", [
 	"$q",
 	function($http, $q) {
 
-		var endpoint = "/ws/"
+		var endpoint = "/ws"
 
 		function apicall(method, params) {
 			return dummyapicall(method, params)
@@ -17,14 +17,14 @@ App.service("pilightws", [
 
 		function dummyapicall(method, params) {
 
-			if (method == "getall") {
+			if (method == "/getall") {
 				var ret = []
 				for (var i=1; i<=512; i++) {
 					ret.push(Math.floor(256 * Math.random()))
 				}
 				return $q.when(ret)
 			}
-			if (method == "setsingle") {
+			if (method == "/setsingle") {
 				return $q.when()
 			}
 
@@ -33,11 +33,10 @@ App.service("pilightws", [
 		var service = {
 
 			getAll: function() {
-				return apicall("getall")
+				return apicall("/getall")
 			},
 			setChan: function(ch, val) {
-				return apicall("setsingle", {
-					channel: ch,
+				return apicall("/setsingle/"+ch, {
 					value: val
 				})
 			}
