@@ -26,7 +26,7 @@ PUB start : okay
     WatchedChannel  := 1
 
     'Start a cog with watching routine
-    okay := Cog := COGNEW(WatchChanDimmerSim, @watchStack) + 1            'Returns 0-8 depending on success/failure
+    okay := Cog := COGNEW(WatchChan, @watchStack) + 1            'Returns 0-8 depending on success/failure
 
 
 
