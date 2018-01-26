@@ -102,10 +102,11 @@ PUB write(Channel, Value)
 
    DMXdata[Channel] := Value
 
-PUB getDataPointer : ptr
+PUB getValuesPointer : ptr
 
 '' returns a pointer to the start of the channel values
-    return DataPointer + 1
+
+    return DataPointer
 
 DAT
 '

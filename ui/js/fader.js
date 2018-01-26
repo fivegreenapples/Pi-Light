@@ -31,9 +31,13 @@ App.directive("fader", function() {
 					var mouseup = function(ev) {
 						$(document).off("mousemove", mousemove)
 						$(document).off("mouseup", mouseup)
+						$(document).off("touchend", mouseup)
+						$(document).off("touchmove", mousemove)
 					}
 					$(document).on("mouseup", mouseup)
 					$(document).on("mousemove", mousemove)
+					$(document).on("touchend", mouseup)
+					$(document).on("touchmove", mousemove)
 				}
 			}
 		]

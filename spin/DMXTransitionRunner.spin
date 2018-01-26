@@ -8,9 +8,8 @@ VAR
     byte TransitionData[512 * TransitionSize]
     long ValuesPointer
 
-PUB Start(ChannelValuesPointer) : okay
+PUB Start(ChannelValuesPointer)
     ValuesPointer := ChannelValuesPointer
-    return TRUE
 
 PUB SetTransition(channel, startVal, stopVal, type, duration)
     BYTE[ValuesPointer][channel] := startVal

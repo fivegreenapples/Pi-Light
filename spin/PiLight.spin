@@ -6,7 +6,7 @@ CON
 
 OBJ
     serial                      : "FullDuplexSerial"
-'    dmxDriver[UNIVERSES]        : "DMXout"
+    dmxDriver[UNIVERSES]        : "DMXout"
     chanWatcher[UNIVERSES]      : "ChannelWatcher"
     transitioner[UNIVERSES]     : "DMXTransitionRunner"
     byteDisplay                 : "ByteDisplay"
@@ -15,18 +15,15 @@ VAR
     word multiCommandChannels[512]
     
 PUB main | u
-    byteDisplay.Init
-
+   
     serial.Start(31, 30, 0, 115200)
 
     u := 0
     repeat UNIVERSES
-'        dmxDriver[u].start(20+u)
-'        transitioner[u].Start(dmxDriver[u].getDataPointer)
-
-        chanWatcher[u].start
-        chanWatcher[u].setWatchedChannel(100)
-        transitioner[u].Start(chanWatcher[u].getDataPointer)
+        dmxDriver[u].start(26+u)
+        transitioner[u].Start(dmxDriver[u].getValuesPointer)
+        chanWatcher[u].Start(dmxDriver[u].getValuesPointer)
+        chanWatcher[u].setWatchedChannel(7)
 
         u++
 
